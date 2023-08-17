@@ -8,20 +8,18 @@ use App\Http\Requests\UpdateProdutoRequest;
 
 class ProdutoController extends Controller
 {
+    private Produto $produto;
+
+    public function __construct(Produto $produto) {
+        $this->produto = $produto;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->produto->all());
     }
 
     /**
@@ -29,38 +27,41 @@ class ProdutoController extends Controller
      */
     public function store(StoreProdutoRequest $request)
     {
-        //
+        $data = $request->validated();
+        if($request->hasFile('imagem')) {
+            $data['imagem'] = $request->file('imagem')->store('imagem', 'public');
+        }
+        $produto = $this->produto->create($data);
+        return response()->json($produto);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Produto $produto)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Produto $produto)
-    {
-        //
+        $produto = $this->produto->find($id);
+        return response()->json($produto);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProdutoRequest $request, Produto $produto)
+    public function update(UpdateProdutoRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        $produto = $this->produto->find($id);
+        $produto->update($data);
+        return response()->json($produto);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Produto $produto)
+    public function destroy($id)
     {
-        //
+        $produto = $this->produto->find($id);
+        $produto->delete();
+        return 'Produto deletado';
     }
 }

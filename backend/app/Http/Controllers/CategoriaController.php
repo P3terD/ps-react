@@ -8,20 +8,18 @@ use App\Http\Requests\UpdateCategoriaRequest;
 
 class CategoriaController extends Controller
 {
+    private Categoria $categoria;
+
+    public function __construct(Categoria $categoria) {
+        $this->categoria = $categoria;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->categoria->all());
     }
 
     /**
@@ -29,38 +27,38 @@ class CategoriaController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {
-        //
+        $data = $request->validated();
+        $categoria = $this->categoria->create($data);
+        return response()->json($categoria);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Categoria $categoria)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Categoria $categoria)
-    {
-        //
+        $categoria = $this->categoria->find($id);
+        return response()->json($categoria);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoriaRequest $request, Categoria $categoria)
+    public function update(UpdateCategoriaRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        $categoria = $this->categoria->find($id);
+        $categoria->update($data);
+        return response()->json($categoria);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categoria $categoria)
+    public function destroy($id)
     {
-        //
+        $categoria = $this->categoria->find($id);
+        $categoria->delete();
+        return 'Categoria deletada!';
     }
 }
