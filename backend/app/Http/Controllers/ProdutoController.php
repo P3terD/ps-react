@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Produto;
 use App\Http\Requests\StoreProdutoRequest;
 use App\Http\Requests\UpdateProdutoRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProdutoController extends Controller
 {
@@ -31,6 +32,7 @@ class ProdutoController extends Controller
         if($request->hasFile('imagem')) {
             $data['imagem'] = $request->file('imagem')->store('imagem', 'public');
         }
+
         $produto = $this->produto->create($data);
         return response()->json($produto);
     }
@@ -51,6 +53,11 @@ class ProdutoController extends Controller
     {
         $data = $request->validated();
         $produto = $this->produto->find($id);
+        if($request->hasFile('imagem')) {
+            Storage::disk('public')->delete($produto->imagem);
+            $data['imagem'] = $request->file('imagem')->store('imagem', 'public');
+        }
+
         $produto->update($data);
         return response()->json($produto);
     }
@@ -61,6 +68,7 @@ class ProdutoController extends Controller
     public function destroy($id)
     {
         $produto = $this->produto->find($id);
+        Storage::disk('public')->delete($produto->imagem);
         $produto->delete();
         return 'Produto deletado';
     }
