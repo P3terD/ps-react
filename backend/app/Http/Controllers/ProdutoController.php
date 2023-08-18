@@ -20,7 +20,8 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        return response()->json($this->produto->all());
+        $produtos = $this->produto->with('categorias')->get();
+        return response()->json($produtos);
     }
 
     /**
@@ -42,7 +43,7 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        $produto = $this->produto->find($id);
+        $produto = $this->produto->with('categorias')->find($id);
         return response()->json($produto);
     }
 

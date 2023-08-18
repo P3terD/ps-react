@@ -19,7 +19,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return response()->json($this->categoria->all());
+        $categorias = $this->categoria->with('produtos')->get();
+        return response()->json($categorias);
     }
 
     /**
@@ -37,7 +38,7 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
-        $categoria = $this->categoria->find($id);
+        $categoria = $this->categoria->with('produtos')->find($id);
         return response()->json($categoria);
     }
 
