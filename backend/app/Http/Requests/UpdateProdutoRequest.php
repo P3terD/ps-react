@@ -22,11 +22,11 @@ class UpdateProdutoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome'=>'required',
-            'descricao'=>'required',
-            'quantidade'=>'required',
-            'imagem'=>'required',
-            'categoria_id'=>'required'
+            'nome'=>'sometimes',
+            'descricao'=>'sometimes',
+            'quantidade'=>'sometimes',
+            'imagem'=>'sometimes',
+            'categoria_id'=>'sometimes'
         ];
     }
 }

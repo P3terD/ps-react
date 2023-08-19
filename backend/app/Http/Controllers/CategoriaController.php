@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Http\Requests\StoreCategoriaRequest;
 use App\Http\Requests\UpdateCategoriaRequest;
+use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
@@ -17,9 +18,12 @@ class CategoriaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categorias = $this->categoria->with('produtos')->get();
+        $categorias = $this->categoria->with('produtos')->when($request->search, function ($query) use ($request){
+            $query->where('nome', 'like', '%'.$request->search.'%');
+        })->paginate(10);
+
         return response()->json($categorias);
     }
 
@@ -36,7 +40,7 @@ class CategoriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(int $id)
     {
         $categoria = $this->categoria->with('produtos')->find($id);
         return response()->json($categoria);
@@ -45,7 +49,7 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoriaRequest $request, $id)
+    public function update(UpdateCategoriaRequest $request, int $id)
     {
         $data = $request->validated();
         $categoria = $this->categoria->find($id);
@@ -56,7 +60,7 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $categoria = $this->categoria->find($id);
         $categoria->delete();
