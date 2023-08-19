@@ -3,6 +3,7 @@ import {Navigate} from "react-router-dom";
 import DefaultLayout from "../pages/layouts/DefaultLayout";
 import Dashboard from "../pages/Private/Dashboard";
 import Users from "../pages/Private/Users";
+import Produtos from "../pages/Private/Produtos"
 import GuestLayout from "../pages/layouts/GuestLayout";
 import Login from "../pages/Public/Login";
 import Signup from "../pages/Public/Signup";
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         path: '/users',
         element: <Users />,
       },
+      {
+        path: '/products',
+        element: <Produtos />,
+      }
     ]
   },
   {
