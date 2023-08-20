@@ -12,6 +12,7 @@ import { findIndex } from "lodash";
 import Pagination from "../../../components/Layout/Pagination";
 import { Spinner } from "react-bootstrap";
 import TableContainer from "../../../components/Layout/TableContainer";
+import ModalProduct from "../../../components/Modals/ModalProduct";
 
 const INITIAL_DATA = {
   total: 0,
@@ -65,21 +66,21 @@ export default function Produtos() {
         search: q.search !== "" ? q.search : undefined,
       },
     })
-      .then((response) => {
-        setTableData(response.data);
+    .then((response) => {
+      setTableData(response.data);
+      setLoading(false);
+      setPaginating(false);
+      setFiltering(false);
+    })
+    .catch((err) => {
+      if (err) {
+        console.log(err);
+        toast.error("Erro ao carregar dados da tabela");
+        setTableData({ ...INITIAL_DATA });
         setLoading(false);
         setPaginating(false);
         setFiltering(false);
-      })
-      .catch((err) => {
-        if (err) {
-          console.log(err);
-          toast.error("Erro ao carregar dados da tabela");
-          setTableData({ ...INITIAL_DATA });
-          setLoading(false);
-          setPaginating(false);
-          setFiltering(false);
-        }
+      }
     });
   };
 
@@ -178,9 +179,11 @@ export default function Produtos() {
           </div>
 
           <div className="col-12 col-md-2 d-flex justify-content-end mb-2">
-            <button className="btn btn-outline-success ms-2" type="button">
-              <span>Create</span>
-            </button>
+            <ModalProduct onCreate={handleCreateProduct}>
+              <button className="btn btn-outline-success ms-2" type="button">
+                <span>Create</span>
+              </button>
+            </ModalProduct>
           </div>
         </div>
 
