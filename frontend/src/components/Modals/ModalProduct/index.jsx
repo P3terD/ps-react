@@ -29,7 +29,6 @@ const ModalProduct = ({
 
     const [isFiltering, setFiltering] = React.useState(true);
     const [isPaginating, setPaginating] = React.useState(true);
-    const [tableData, setTableData] = React.useState({ ...INITIAL_DATA });
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -42,13 +41,13 @@ const ModalProduct = ({
         BaseApi
         .get("/categoria")
         .then((response) => {
-            setTableData(response.data);
+            setCatAPI(response.data);
         })
         .catch((err) => {
             if (err) {
                 console.log(err);
                 toast.error("Erro ao carregar dados da categoria");
-                setTableData({ ...INITIAL_DATA });
+                setCatAPI({ ...INITIAL_DATA });
                 setLoading(false);
                 setPaginating(false);
                 setFiltering(false);
@@ -77,7 +76,7 @@ const ModalProduct = ({
         const formData = buildFormData();
 
         if(idProduct) {
-            BaseApi.post(`/jogador/${idProduct}`, formData).then(res => {
+            BaseApi.post(`/produto/${idProduct}`, formData).then(res => {
                 setSaving(false);
                 setShowModal(false);
                 toast.success("Product updated successfully!");
@@ -89,7 +88,7 @@ const ModalProduct = ({
             })
         } 
         else {
-            BaseApi.post('/jogador', formData
+            BaseApi.post('/produto', formData
             ).then(res => {
                 setSaving(false);
                 setShowModal(false);
@@ -218,7 +217,7 @@ const ModalProduct = ({
                                 </div>
                                 <div className="form-group mb-3">
                                     <label htmlFor="category">Product's Category</label>
-                                    <select value={category} name="category" onChange={(e) => setCategory(e.target.value)}>
+                                    <select value={category} name="category" id="category" onChange={(e) => setCategory(e.target.value)}>
                                         <option value="" disabled='disabled' selected>Chose the Product's Category</option>
                                         {catAPI.data.map((item) => (
                                             <option value={item.id}>{item.nome}</option>

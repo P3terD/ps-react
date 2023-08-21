@@ -129,7 +129,7 @@ export default function Produtos() {
     }).then(({ isConfirmed }) => {
       if (isConfirmed) {
         setLoading(true);
-        BaseApi.delete(`/produtos/${product.id}`)
+        BaseApi.delete(`/produto/${product.id}`)
           .then(res => {
             toast.success('Product deleted successfully!');
             requestData();
