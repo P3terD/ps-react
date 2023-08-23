@@ -27,8 +27,8 @@ const ModalProduct = ({
     const [isSaving, setSaving] = React.useState(true);
     const [isShow, setShowModal] = React.useState(false);
 
-    const [isFiltering, setFiltering] = React.useState(true);
-    const [isPaginating, setPaginating] = React.useState(true);
+    const [setFiltering] = React.useState(true);
+    const [setPaginating] = React.useState(true);
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -217,7 +217,7 @@ const ModalProduct = ({
                                 </div>
                                 <div className="form-group mb-3">
                                     <label htmlFor="category">Product's Category</label>
-                                    <select value={category} name="category" id="category" onChange={(e) => setCategory(e.target.value)}>
+                                    <select value={category} name="category" id="category" onChange={(e) => setCategory(e.target.value)} className="form-select">
                                         <option value="" disabled='disabled' selected>Chose the Product's Category</option>
                                         {catAPI.data.map((item) => (
                                             <option value={item.id}>{item.nome}</option>

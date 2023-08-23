@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router-dom";
 import styles from "./styles.module.css";
 
 import BaseApi from "../../../services/Api";
-import { useStateContext } from "../../../context/ContextProvider";
 
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -239,6 +238,11 @@ export default function Produtos() {
                                   <td>{item.created_at}</td>
                                   <td>
                                     <div className="d-flex align-items-center">
+                                      <ModalProduct
+                                        idProduct={item.id}
+                                        onUpdate={handleUpdateProduct}
+                                      />
+                                      &nbsp;
                                       <button
                                         className="btn btn-danger"
                                         onClick={() => onDelete(item)}
