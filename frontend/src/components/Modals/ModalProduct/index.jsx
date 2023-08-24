@@ -116,8 +116,8 @@ const ModalProduct = ({
         BaseApi.get(`/produto${idProduct ? `/${idProduct}` : ''}`).then(res => {
             let data = res.data;
             setName(data.nome);
-            setDescription(data.description);
-            setQuantity(data.quantity);
+            setDescription(data.descricao);
+            setQuantity(data.quantidade);
             setCategory(data.categoria_id);
             setImage(data.imagem);
             setLoading(false);
@@ -248,7 +248,7 @@ const ModalProduct = ({
 
                                     {image && !idProduct && (
                                         <div className="d-flex justify-content-center align-items-center mt-2">
-                                            {idProduct ? <img src="image" alt="imagem" style={{ minWidth: 250, width: 350, objectFit: 'cover' }} />
+                                            {idProduct ? <img src={image} alt="imagem" style={{ minWidth: 250, width: 350, objectFit: 'cover' }} />
                                                 : <img src={URL.createObjectURL(image)} alt="imagem" style={{ minWidth: 250, width: 350, objectFit: 'cover' }} />
                                             } 
                                         </div>
