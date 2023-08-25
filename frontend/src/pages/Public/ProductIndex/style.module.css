@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+:root{
+    --footer: white;
+    --gray: gray;
+    --letters: rgb(233, 233, 233);
+    --first: #7a1879;
+    --second: #943292;
+    --third: #b15eae;
+    --fourth: #fcd7fc;
+    --fifth: #8b2b88;
+    --sixth: #31002f;
+}
+
+.productspage{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    color: var(--letters);
+    background: var(--fourth);
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.productpage ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.productpage a{
+    color: var(--letters);
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+}
+
+.productpage footer{
+    margin-top: auto;
+    width: 100%;
+    color: var(--footer);
+    align-items: center;
+    justify-content: center;
+}
+
+.productpage h1 {
+    color: var(--letters);
+    margin-bottom: 10px;
+    font-weight: 900;
+}
+
+.wrapper{
+    margin: 2rem;
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit,minmax(16rem,18rem));
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 660px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+}

@@ -9,6 +9,7 @@ import Login from "../pages/Public/Login";
 import Signup from "../pages/Public/Signup";
 import NotFound from "../pages/Public/NotFound";
 import Category from "../pages/Private/Categorias";
+import ProductIndex from "../pages/Public/ProductIndex";
 
 
 const router = createBrowserRouter([
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         element: <Category />,
       }
     ]
+  },
+  {
+    path: '/productIndex',
+    element: <ProductIndex />,
   },
   {
     path: '/',

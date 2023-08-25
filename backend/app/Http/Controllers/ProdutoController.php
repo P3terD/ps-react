@@ -61,7 +61,8 @@ class ProdutoController extends Controller
         $produto = $this->produto->find($id);
         if($request->hasFile('imagem')) {
             Storage::disk('public')->delete($produto->imagem);
-            $data['imagem'] = $request->file('imagem')->store('imagem', 'public');
+            $path = $request->file('imagem')->store('imagem', 'public');
+            $data['imagem'] = url('storage/' . $path);
         }
 
         $produto->update($data);
