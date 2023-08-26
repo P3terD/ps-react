@@ -11,15 +11,23 @@
     display: flex;
     justify-content: flex-end;
     margin-right: 1vw;
+    list-style: none;
 }
 
 .logo{
     position: absolute;
-    left: 1vw;
+    left: 2vw;
     top: 5px;
     max-height: 50px;
     margin: auto;
-    cursor: pointer;;
+    cursor: pointer;
+}
+
+.search {
+    width: 18%;
+    max-height: 36px;
+    display: flex;
+    margin: auto 1vw; 
 }
 
 .search_input {
@@ -50,4 +58,23 @@
     border-radius: 0 10px 10px 0;
     cursor: pointer;
     transition: all 1s ease;
+}
+
+.search_submit:hover {
+    background: var(--third);
+}
+
+.nav_links{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav_item {
+    height: 48px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    margin-left: 25px;
+    margin-right: 15px;
 }

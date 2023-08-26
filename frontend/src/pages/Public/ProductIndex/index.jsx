@@ -1,11 +1,17 @@
 import Cards from '../../../components/Product/Cards/Cards'
 import Navbar from '../../../components/Product/Navbar/Navbar'
+import NavItems from '../../../components/Product/Navbar/NavItems'
 import style from './style.module.css'
 
 export default function productIndex() {
     return (
         <div className={style.productspage}>
-            <Navbar />
+            <Navbar>
+                <NavItems
+                    link="#"
+                    icon="Início"
+                />
+            </Navbar>
 
             <div className={style.wrapper}>
                 <Cards 
