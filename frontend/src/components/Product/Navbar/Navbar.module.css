@@ -20,6 +20,7 @@
     top: 5px;
     max-height: 50px;
     margin: auto;
+    margin-top: 0.2vh;
     cursor: pointer;
 }
 
@@ -64,12 +65,17 @@
     background: var(--third);
 }
 
+.search_icon {
+    padding-left: 2px;
+    padding-right: 5px;
+}
+
 .nav_links{
     display: flex;
     justify-content: flex-end;
 }
 
-.nav_item {
+.nav_item{
     height: 48px;
     display: flex;
     align-content: center;
@@ -77,4 +83,16 @@
     margin: auto;
     margin-left: 25px;
     margin-right: 15px;
+    margin-top: 2vh;
+}
+
+.nav_item > a{
+    display: block;
+    font-size: 20px;
+    color: var(--letters);
+    transition: all 0.5s ease;
+}
+
+.nav_item > a:hover{
+    color: var(--first);
 }

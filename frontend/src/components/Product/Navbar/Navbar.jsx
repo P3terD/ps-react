@@ -15,9 +15,9 @@ export default function Navbar(props) {
                         onChange={props.change}
                     />
                     <button className={style.search_submit} type='submit'>
-                        <span class="material-symbols-outlined">
-                            Buscar
-                        </span>
+                        <div className={style.search_icon}>
+                         <i class="fa-solid fa-magnifying-glass" />
+                        </div>
                     </button>
                 </form>
 
@@ -25,7 +25,7 @@ export default function Navbar(props) {
                     {props.children}
                 </div>
 
-                <li className="style nav_item">
+                <li className={style.nav_item}>
                     <div className="style hamburguer">
                         <span></span>
                         <span></span>
