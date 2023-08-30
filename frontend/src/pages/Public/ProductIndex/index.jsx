@@ -2,11 +2,40 @@ import Cards from '../../../components/Product/Cards/Cards'
 import Navbar from '../../../components/Product/Navbar/Navbar'
 import NavItems from '../../../components/Product/Navbar/NavItems'
 import style from './style.module.css'
+import { useRef } from 'react'
 
-export default function productIndex() {
-    const controls = document.querySelectorAll('.control');
+export default function ProductIndex() {
     let current_item = 0;
-    
+    const items = [
+        "https://c4.wallpaperflare.com/wallpaper/999/730/463/yellow-fiction-cap-pikachu-detective-hd-wallpaper-preview.jpg",
+        "https://m.media-amazon.com/images/I/81XP0ETndkL.jpg",
+        "https://images5.alphacoders.com/129/1299476.png"
+    ];
+    const maxItems = items.length - 1;
+
+    const leftArrow = useRef();
+    const rightArrow = useRef();
+    const refImg = useRef();
+
+    const handleChangeImage = (leftArrow) => {
+        const isLeft = (leftArrow.currentTarget.className == "style_arrow_left__qvSNH");
+
+        if (isLeft) {
+            current_item -= 1;
+        } else {
+            current_item += 1;
+        }
+
+        if (current_item > maxItems) {
+            current_item = 0;
+        }
+
+        if (current_item < 0) {
+            current_item = maxItems;
+        }
+
+        refImg.current.src = items[current_item]
+    };
 
     return (
         <div className={style.productspage}>
@@ -24,13 +53,11 @@ export default function productIndex() {
 
             <div className={style.shoppingPage}>
                 <div className={style.slider}>
-                    <button className={style.arrow_left}>◄</button>
-                    <button className={style.arrow_right}>►</button>
                     <div className={style.gallery_wrapper}>
                         <div className={style.gallery}>
-                            <img src='https://c4.wallpaperflare.com/wallpaper/999/730/463/yellow-fiction-cap-pikachu-detective-hd-wallpaper-preview.jpg' alt='pokemon images' className={style.current_item} />
-                            <img src='https://m.media-amazon.com/images/I/81XP0ETndkL.jpg' alt='joker image' className={style.slider_item} />
-                            <img src='https://images5.alphacoders.com/129/1299476.png' alt='harry potter image' className={style.slider_item} />
+                            <button className={style.arrow_left} onClick={handleChangeImage} ref={leftArrow}>◄</button>
+                            <button className={style.arrow_right} onClick={handleChangeImage} ref={rightArrow}>►</button>
+                            <img src={items[current_item]} alt='slider image' className={style.slider_item} ref={refImg} />
                         </div>
                     </div>
                 </div>
