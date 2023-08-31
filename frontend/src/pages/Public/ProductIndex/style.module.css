@@ -49,18 +49,19 @@
     justify-content: center;
 }
 
-.productpage h1 {
-    color: var(--letters);
-    margin-bottom: 10px;
-    font-weight: 900;
-}
-
 .slider {
-    display: flex;
+    display: grid;
+    grid-template-rows: auto;
     padding: 2rem;
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+.slider h1 {
+    color: var(--letters2);
+    font-size: 30px;
+    margin-bottom: 1vh;
 }
 
 .arrow_left,
@@ -80,7 +81,7 @@
     opacity: 0.1;
     transition: all 500ms ease-in-out;
     margin-left: 22.5vw;
-    margin-top: 12vh;
+    margin-top: 17.8vh;
 }
 
 .arrow_right {
@@ -127,6 +128,7 @@
 .big_categories > h1 {
     font-size: 30px;
     font-weight: 600;
+    padding-bottom: 2vh;
 }
 
 .wrapper{
@@ -141,16 +143,37 @@
 }
 
 .input_category{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.75rem;
 }
 
 .input_category input{
     box-sizing: border-box;
     width: auto;
+    height: 10px;
+    appearance: none;
+    border: 0.15em solid var(--sixth);
+    border-radius: 10px;
+    place-content: center;
+    transition: 120ms ease-in-out;
+    margin-right: 2vw;
+    margin-top: 0.5vh;
 }
+
+.input_category input:checked{
+    background-color: var(--third);
+    transition: 120ms ease-in-out;
+}
+
+.input_category label{
+    font-size: 20px;
+}
+
+.input_category label:hover {
+    color: var(--gray);
+}
+
 
 @media screen and (max-width: 660px) {
     .wrapper {
