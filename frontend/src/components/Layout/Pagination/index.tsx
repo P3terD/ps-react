@@ -166,16 +166,18 @@ const Pagination = ({ paginateData, onPaginate, onPaginatePerPage, children, sho
 
         {(paginateData?.total || 0) > 0 && (
           <div className="d-flex justify-content-around align-items-center">
-            <p className="mb-0">
-              Exibindo{" "}
-              <b>
-                {paginateData?.from || 1} — {paginateData?.to || 1}
-              </b>{" "}
-              de registros.
-            </p>
-            <p className="mb-0">
-              Total de <b>{paginateData?.total || 0}</b>.
-            </p>
+            <div className={styles.textColors}>
+              <p className="mb-0">
+                Exibindo{" "}
+                <b>
+                  {paginateData?.from || 1} — {paginateData?.to || 1}
+                </b>{" "}
+                de registros.
+              </p>
+              <p className="mb-0">
+                Total de <b>{paginateData?.total || 0}</b>.
+              </p>
+            </div>
           </div>
         )}
       </div>

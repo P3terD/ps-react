@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('quantidade');
             $table->string('imagem');
             $table->unsignedBigInteger('categoria_id');
+            $table->float('preco');
             $table->timestamps();
 
             $table->foreign('categoria_id')->references('id')->on('categorias')->cascadeOnDelete();

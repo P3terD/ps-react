@@ -40,7 +40,7 @@
     color: var(--letters2);
     transition: all 1s ease;
 }
-
+ 
 .search:hover > .search_input, 
 .search_input:focus {
     border: 3px solid var(--fifth);
@@ -86,13 +86,19 @@
     margin-top: 2vh;
 }
 
-.nav_item > a{
+.nav_item > button{
     display: block;
     font-size: 20px;
     color: var(--letters);
     transition: all 0.5s ease;
 }
 
-.nav_item > a:hover{
+.nav_item > button:hover{
     color: var(--first);
+}
+
+.icon_button {
+    background-color: transparent;
+    border-color: transparent;
+    margin-top: -1rem;
 }

@@ -219,6 +219,7 @@ export default function Produtos() {
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Quantity</th>
+                                <th>Price</th>
                                 <th>Category</th>
                                 <th>Image</th>
                                 <th>Create Date</th>
@@ -232,6 +233,7 @@ export default function Produtos() {
                                   <td>{item.nome}</td>
                                   <td>{item.descricao}</td>
                                   <td>{item.quantidade}</td>
+                                  <td>{item.preco}</td>
                                   <td>{item?.categorias?.nome}</td>
                                   <td>{<img className={styles.productImage} src={item.imagem} alt="" />}</td>
 

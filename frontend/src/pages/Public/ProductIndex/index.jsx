@@ -149,6 +149,7 @@ export default function ProductIndex() {
     const leftArrow = useRef();
     const rightArrow = useRef();
     const refImg = useRef();
+    const refProduct = useRef();
 
     const handleChangeImage = (leftArrow) => {
         const isLeft = (leftArrow.currentTarget.className == "style_arrow_left__qvSNH");
@@ -170,8 +171,12 @@ export default function ProductIndex() {
         refImg.current.src = items[current_item]
     };
 
+    const handleDarkMode = () => {
+        refProduct.current.classList.toggle(style.darkmode)
+    }
+
     return (
-        <div className={style.productspage}>
+        <div className={style.productspage} ref={refProduct}>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
                 integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
                 crossorigin="anonymous" referrerpolicy="no-referrer" 
@@ -179,8 +184,8 @@ export default function ProductIndex() {
 
             <Navbar>
                 <NavItems
-                    link="#"
-                    icon=<i className="fa-regular fa-moon darkmode"></i>
+                    action={handleDarkMode}
+                    icon=<i className="fa-regular fa-moon"></i>
                 />
             </Navbar>
 
@@ -209,52 +214,55 @@ export default function ProductIndex() {
                         </div> 
                     </div>
 
-                    {!isLoading && (
-                        <>
-                            {isFiltering && (
-                                <div className="spinner-border" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                                </div>
-                            )}
-                            {!isFiltering && (
-                                <>
-                                    <Pagination
-                                        onPaginate={handlePagination}
-                                        showOnBottom={!isPaginating && tableData.data.length > 0}
-                                        showOnTop={tableData.data.length > 0}
-                                        paginateData={tableData}
-                                    >
-                                        
-                                        {!isPaginating && (
-                                            <div className={style.wrapper}>
-                                                {tableData.data.map ((product) => (
-                                                    <Cards
-                                                        img={product.imagem}
-                                                        nome={product.nome}
-                                                        descricao={product.descricao}
-                                                        quantidade={product.quantidade}
-                                                        categoria={product.categoria_id}
-                                                    />
-                                                ))}
-                                            </div>
-                                        )}
+                    <div className={style.pagination}>
+                        {!isLoading && (
+                            <>
+                                {isFiltering && (
+                                    <div className="spinner-border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                    </div>
+                                )}
+                                {!isFiltering && (
+                                    <>
+                                        <Pagination
+                                            onPaginate={handlePagination}
+                                            showOnBottom={!isPaginating && tableData.data.length > 0}
+                                            showOnTop={tableData.data.length > 0}
+                                            paginateData={tableData}
+                                        >
+                                            
+                                            {!isPaginating && (
+                                                <div className={style.wrapper}>
+                                                    {tableData.data.map ((product) => (
+                                                        <Cards
+                                                            img={product.imagem}
+                                                            nome={product.nome}
+                                                            descricao={product.descricao}
+                                                            quantidade={product.quantidade}
+                                                            categoria={product.categoria_id}
+                                                            preco={product.preco}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            )}
 
-                                        {isPaginating && (
-                                        <div className="spinner-border" role="status">
-                                            <span className="visually-hidden">Loading...</span>
-                                        </div>
-                                        )}
-                                        
-                                        {tableData.data.length === 0 && (
-                                        <h5 className="text-purple-3 text-center">
-                                            Não foram encontrados registros com estes filtros.
-                                        </h5>
-                                        )}
-                                    </Pagination>
-                                </>
-                            )}
-                        </>
-                    )}
+                                            {isPaginating && (
+                                            <div className="spinner-border" role="status">
+                                                <span className="visually-hidden">Loading...</span>
+                                            </div>
+                                            )}
+                                            
+                                            {tableData.data.length === 0 && (
+                                            <h5 className="text-purple-3 text-center">
+                                                Não foram encontrados registros com estes filtros.
+                                            </h5>
+                                            )}
+                                        </Pagination>
+                                    </>
+                                )}
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

@@ -26,7 +26,8 @@ class UpdateProdutoRequest extends FormRequest
             'descricao'=>'sometimes',
             'quantidade'=>'sometimes',
             'imagem'=>'sometimes',
-            'categoria_id'=>'sometimes'
+            'categoria_id'=>'sometimes',
+            'preco' => ['sometimes', 'numeric', 'regex:/^\d+(.\d{1,2})?$/'],
         ];
     }
 }

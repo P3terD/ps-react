@@ -10,6 +10,7 @@ export default function Cards(props) {
                     <p className={style.card_description_quantity}> Descrição: {props.descricao}</p>
                     <p className={style.card_description_quantity}> Quantidade: {props.quantidade}</p>
                     <p className={style.card_category}> Categoria: {props.categoria}</p>
+                    <p className={style.card_price}>Preço: {props.preco}</p>
                 </div>
                 <div className={style.btn_div}>
                     <button className={style.card_btn}>Comprar</button>

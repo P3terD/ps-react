@@ -24,9 +24,10 @@ class StoreProdutoRequest extends FormRequest
         return [
             'nome'=>'required',
             'descricao'=>'required',
-            'quantidade'=>'required',
+            'quantidade'=>['required', 'numeric'],
             'imagem'=>'image|mimes:jpg,png,jpeg',
-            'categoria_id'=>'required'
+            'categoria_id'=>'required',
+            'preco' => ['required', 'numeric', 'regex:/^\d+(.\d{1,2})?$/'],
         ];
     }
 }

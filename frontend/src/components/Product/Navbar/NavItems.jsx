@@ -5,9 +5,9 @@ export default function navItems(props) {
     if (props.children) {
         return(
             <li className={style.nav_item}>
-                <a href={props.link} className={style.icon_button}>
+                <button onClick={props.action} className={style.icon_button}>
                     {props.icon}
-                </a>
+                </button>
                 <div className={style.drop_div}>
                     {props.children}
                 </div>
@@ -16,9 +16,9 @@ export default function navItems(props) {
     } else {
         return (
             <li className={style.nav_item}>
-                <a href={props.link} className={style.icon_button}>
+                <button onClick={props.action} className={style.icon_button}>
                     {props.icon}
-                </a>
+                </button>
             </li>
         )
     }

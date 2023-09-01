@@ -34,6 +34,7 @@ const ModalProduct = ({
     const [description, setDescription] = useState('');
     const [quantity, setQuantity] = React.useState('');
     const [category, setCategory] = React.useState('');
+    const [price, setPrice] = React.useState('');
     const [image, setImage] = React.useState(null);
     const [catAPI, setCatAPI] = React.useState({...INITIAL_DATA});
     
@@ -60,6 +61,7 @@ const ModalProduct = ({
         formData.append("nome", name);
         formData.append("descricao", description);
         formData.append("quantidade", quantity);
+        formData.append("preco", price)
         formData.append("categoria_id", category);
         if (image) {
             formData.append("imagem", image);
@@ -118,6 +120,7 @@ const ModalProduct = ({
             setName(data.nome);
             setDescription(data.descricao);
             setQuantity(data.quantidade);
+            setPrice(data.preco)
             setCategory(data.categoria_id);
             setImage(data.imagem);
             setLoading(false);
@@ -137,6 +140,7 @@ const ModalProduct = ({
             setName('');
             setDescription('');
             setQuantity('');
+            setPrice('');
             setCategory('')
             setImage(null);
             setLoading(true);
@@ -216,6 +220,17 @@ const ModalProduct = ({
                                     />
                                 </div>
                                 <div className="form-group mb-3">
+                                    <label htmlFor="price">Price</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="price"
+                                        placeholder="Enter product's price"
+                                        value={price}
+                                        onChange={(e) => setPrice(e.target.value)}
+                                    />
+                                </div>
+                                <div className="form-group mb-3">
                                     <label htmlFor="category">Product's Category</label>
                                     <select value={category} name="category" id="category" onChange={(e) => setCategory(e.target.value)} className="form-select">
                                         <option value="" disabled='disabled' selected>Chose the Product's Category</option>
@@ -237,7 +252,7 @@ const ModalProduct = ({
                                         idProduct ? (
                                             <div className="d-flex justify-content-center align-items-center mt-2">
                                                 <img 
-                                                    scr={image instanceof File ? URL.createObjectURL(image) : image}
+                                                    src={image instanceof File ? URL.createObjectURL(image) : image}
                                                     alt="imagem"
                                                     style={{ minWidth: 250, width: 350, objectFit: 'cover' }}
                                                 />
