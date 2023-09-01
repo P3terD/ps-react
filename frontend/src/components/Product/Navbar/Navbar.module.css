@@ -37,7 +37,7 @@
     border-right: none;
     height: 36px;
     border-radius: 10px 0 0 10px;
-    color: var(--letters2);
+    color: black;
     transition: all 1s ease;
 }
  
@@ -46,7 +46,7 @@
     border: 3px solid var(--fifth);
     border-right: none;
     outline: none;
-    color: var(--letters2);
+    color: black;
 }
 
 .search_submit {

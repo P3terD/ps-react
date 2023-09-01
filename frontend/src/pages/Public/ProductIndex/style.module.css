@@ -15,7 +15,7 @@
 
 .darkmode{
     --footer: black;
-    --gray: gray;
+    --gray: rgb(79, 79, 79);
     --letters: black;
     --letters2: rgb(233, 233, 233);
     --first: #50104f;
