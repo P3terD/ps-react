@@ -54,7 +54,7 @@ export default function ProductIndex() {
     });
     const [filters, setFilters] = React.useState({ ...INITIAL_FILTERS });
     const [tableData, setTableData] = React.useState({ ...INITIAL_DATA });
-    const [natData, setNatData] = React.useState({ ...INITIAL_DATA });
+    const [catData, setCatData] = React.useState({ ...INITIAL_DATA });
 
     const { setNotification } = useStateContext();
 
@@ -86,11 +86,11 @@ export default function ProductIndex() {
         });
     };
 
-    const requestNatData = () => {
+    const requestCatData = () => {
         setLoading(true);
         BaseApi.get("/categoria")
         .then((response) => {
-            setNatData(response.data);
+            setCatData(response.data);
             setLoading(false);
             setPaginating(false);
             setFiltering(false);
@@ -99,7 +99,7 @@ export default function ProductIndex() {
             if (err) {
             console.log(err);
             toast.error("Erro ao carregar dados da tabela");
-            setNatData({ ...INITIAL_DATA });
+            setCatData({ ...INITIAL_DATA });
             setLoading(false);
             setPaginating(false);
             setFiltering(false);
@@ -124,13 +124,12 @@ export default function ProductIndex() {
         setSearch();
         setFiltering(true);
         setQuery({ ...query, ...filters, page: 1 });
-
       };
 
     useEffect(() => {
         controller = new AbortController();
         requestData();
-        requestNatData()
+        requestCatData()
        
         return () => {
         controller.abort();
@@ -150,6 +149,7 @@ export default function ProductIndex() {
     const rightArrow = useRef();
     const refImg = useRef();
     const refProduct = useRef();
+    const refCheckbox = useRef([]);
 
     const handleChangeImage = (leftArrow) => {
         const isLeft = (leftArrow.currentTarget.className == "style_arrow_left__qvSNH");
@@ -182,7 +182,10 @@ export default function ProductIndex() {
                 crossorigin="anonymous" referrerpolicy="no-referrer" 
             />
 
-            <Navbar>
+            <Navbar
+                onsubmit={handleFilters}
+                change={(e) => setFilters({ ...filters, search: e.target.value })}
+            >
                 <NavItems
                     action={handleDarkMode}
                     icon=<i className="fa-regular fa-moon"></i>
@@ -204,14 +207,38 @@ export default function ProductIndex() {
                 <div className={style.shoppingSection}>
                     <div className={style.big_categories}>
                         <h1>Categorias</h1>
-                        
-                        <div className={style.input_category}>
-                            <input type='checkbox' id='1'/>
-                            <label htmlFor='1'>Pelúcias</label> 
 
-                            <input type='checkbox' id='2'/>
-                            <label htmlFor='2'>Chaveiro</label> 
-                        </div> 
+                        {
+                            catData.data.map((category) => (
+                                <form onSubmit={handleFilters}>
+                                    <button className={style.input_category}
+                                        onClick={(e) => {
+                                            setFilters({ ...filters, search: e.target.value })
+                                        }}
+                                        value={category.id}
+                                    >
+                                        <input type='checkbox' 
+                                            id={category.id}
+                                            ref={(element) => refCheckbox.current.push(element)}
+                                            onChange={(e) => {
+
+                                                if(e.target.value == category.id){
+                                                    refCheckbox.current.forEach((checkbox) => {
+                                                        try {
+                                                            if(checkbox.value != category.id){
+                                                                checkbox.checked = false  
+                                                            }                                               
+                                                        } catch {}
+                                                    })
+                                                }
+                                            }}
+                                            value={category.id}
+                                        />
+                                        <label htmlFor={category.id}>{category.nome}</label>
+                                    </button>
+                                </form>
+                            ))
+                        }
                     </div>
 
                     <div className={style.pagination}>
@@ -219,7 +246,7 @@ export default function ProductIndex() {
                             <>
                                 {isFiltering && (
                                     <div className="spinner-border" role="status">
-                                    <span className="visually-hidden">Loading...</span>
+                                        <span className="visually-hidden">Loading...</span>
                                     </div>
                                 )}
                                 {!isFiltering && (
@@ -239,7 +266,7 @@ export default function ProductIndex() {
                                                             nome={product.nome}
                                                             descricao={product.descricao}
                                                             quantidade={product.quantidade}
-                                                            categoria={product.categoria_id}
+                                                            categoria={product?.categorias?.nome}
                                                             preco={product.preco}
                                                         />
                                                     ))}

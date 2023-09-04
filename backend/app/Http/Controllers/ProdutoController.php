@@ -22,7 +22,7 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         $produtos = $this->produto->with('categorias')->when($request->search, function ($query) use ($request){
-            $query->where('nome', 'like', '%'.$request->search.'%');
+            $query->where('nome', 'like', '%'.$request->search.'%')->orWhere('categoria_id',$request->search);
         })->paginate(10);
 
         return response()->json($produtos);

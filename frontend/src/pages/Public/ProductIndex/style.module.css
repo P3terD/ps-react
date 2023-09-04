@@ -26,6 +26,11 @@
     --sixth: #950090;
 }
 
+.invisible {
+    background-color: red;
+    display: none;
+}
+
 .productspage{
     display: flex;
     flex-direction: column;
@@ -163,6 +168,7 @@
 }
 
 .input_category{
+    all:unset;
     display: grid;
     grid-template-columns: 1em auto;
     gap: 0.75rem;

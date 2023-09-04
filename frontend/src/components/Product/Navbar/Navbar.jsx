@@ -4,19 +4,19 @@ export default function Navbar(props) {
     return(
         <nav className={style.navbar}>
             <ul className={style.navbar_nav}>
-                <form className={style.search} onsubmit={props.onsubmit}>
+                <form className={style.search} onSubmit={props.onsubmit}>
                     <h1 className={style.logo}>GeekStore</h1>
                     <input 
                         type='text'
                         name='query'
                         className={style.search_input}
                         placeholder='Buscar Produto...'
-                        value={props.search_input}
+                        value={props.searchValue}
                         onChange={props.change}
                     />
                     <button className={style.search_submit} type='submit'>
                         <div className={style.search_icon}>
-                         <i class="fa-solid fa-magnifying-glass" />
+                            <i class="fa-solid fa-magnifying-glass" />
                         </div>
                     </button>
                 </form>
